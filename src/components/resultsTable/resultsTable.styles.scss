@@ -1,0 +1,13 @@
+table {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th {
+  border-bottom: 1px solid black;
+}
+
+tr:nth-child(even) {
+  background-color: white;
+}
