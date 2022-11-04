@@ -1,6 +1,5 @@
 import "./raceSelection.styles.scss";
-
-const raceList = ["none", "Race Judicata", "2022 Wobble Gobble"];
+import { upcomingRaces } from "../../data/races";
 
 function RaceSelection(props) {
   function setRace() {
@@ -14,10 +13,10 @@ function RaceSelection(props) {
     <div className="RaceSelection">
       <label htmlFor="raceSelection">Select race: </label>
       <select id="raceSelection" name="raceSelection" onChange={setRace}>
-        {raceList.map((race, index) => {
+        {upcomingRaces.map((race, index) => {
           return (
-            <option value={race} key={index}>
-              {race}
+            <option value={race.name} key={index}>
+              {race.name}
             </option>
           );
         })}
