@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import addEntryToDatabase from "../../utilties/addEntryToDatabase";
+import fetchEntry from "../../utilties/fetchEntry";
 import "./stickButton.styles.scss";
 
 function StickButton(props) {
-  const [stickNumber, setStickNumber] = useState(1);
+  const [stickNumber, setStickNumber] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   function clickHandler() {
     const finishTime = Date.now();
@@ -31,9 +33,23 @@ function StickButton(props) {
     setStickNumber(stickNumber + 1);
   }
 
+  // Query database to see how many stick entries already exist;
+  async function fetchStickNumber() {
+    const entryData = await fetchEntry(props.currentRace.name, "*");
+    if (entryData) {
+      setStickNumber(entryData.count);
+      setLoading(false);
+    } else alert("Could not load stick number! Please refresh app.");
+  }
+
+  useEffect(() => {
+    fetchStickNumber();
+  }, []);
+
   return (
     <div>
-      <button onClick={clickHandler}>{stickNumber}</button>
+      {loading && <p>loading...</p>}
+      {!loading && <button onClick={clickHandler}>{stickNumber}</button>}
     </div>
   );
 }

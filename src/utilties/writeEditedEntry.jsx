@@ -1,11 +1,16 @@
 const API_URL =
-  "https://ie35rr9hl9.execute-api.us-east-1.amazonaws.com/beta/fetch-entry";
+  "https://ie35rr9hl9.execute-api.us-east-1.amazonaws.com/beta/write-edited-entry";
 
-async function fetchEntry(raceName, stickNumber) {
+async function writeEditedEntry(raceName, stickNumber, name, distance, gender) {
+  console.log("Running writeEditedEntry");
+
   try {
     const requestData = {
       raceName: raceName,
       stickNumber: stickNumber,
+      name: name,
+      distance: distance,
+      gender: gender,
     };
 
     const response = await fetch(API_URL, {
@@ -20,20 +25,21 @@ async function fetchEntry(raceName, stickNumber) {
       alert(
         `There has been a server error (${response.status}). Please try again.`
       );
-      return;
+      return null;
     }
 
     const data = await response.json();
 
     if (data.result !== "success") {
       alert(`${data.message}. Please try again.`);
-      return;
-    }
-
-    return data;
+      return null;
+    } else if (data.hasOwnProperty("entry")) {
+      return data.entry;
+    } else return null;
   } catch (error) {
     console.error(error);
+    return null;
   }
 }
 
-export default fetchEntry;
+export default writeEditedEntry;

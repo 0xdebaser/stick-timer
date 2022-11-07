@@ -35,6 +35,7 @@ async function addEntryToDatabase(raceName, stickNumber, time) {
     }
   } catch (error) {
     console.error(error);
+    addEntryToDatabase(raceName, stickNumber, time);
   }
 }
 

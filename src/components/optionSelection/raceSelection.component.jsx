@@ -1,11 +1,35 @@
 import "./raceSelection.styles.scss";
-import { upcomingRaces } from "../../data/races";
+import { allRaces, upcomingRaces } from "../../data/races";
+import fetchEntry from "../../utilties/fetchEntry";
 
 function RaceSelection(props) {
-  function setRace() {
+  async function setRace() {
+    let passwordMatches = false;
     const race = document.getElementById("raceSelection").value;
-    if (race !== "none") {
-      props.setCurrentRace({ name: race });
+    // check password
+    if (race !== "Please select a race") {
+      const enteredPassword = prompt(`Please enter password for ${race}`);
+      upcomingRaces.every(async (raceObject) => {
+        if (
+          race === raceObject.name &&
+          enteredPassword === raceObject.password
+        ) {
+          passwordMatches = true;
+          return false;
+        } else return true;
+      });
+      if (!passwordMatches) {
+        alert("Password is incorrect. Please try again.");
+      } else {
+        // If password is correct, check to see if race has already begun
+        const startEntry = await fetchEntry(race, 0);
+        console.log(startEntry);
+        //If race hasn't started, set only name, otherwise set start time as well
+        if (startEntry.hasOwnProperty("message")) {
+          props.setCurrentRace({ name: race });
+        } else
+          props.setCurrentRace({ name: race, startTime: startEntry.data.time });
+      }
     }
   }
 

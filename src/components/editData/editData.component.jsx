@@ -3,19 +3,23 @@ import { useParams } from "react-router-dom";
 
 import "./editData.styles.scss";
 import fetchEntry from "../../utilties/fetchEntry";
+import handleReset from "./handleReset";
+import handleSubmit from "./handleSubmit";
 import { allRaces } from "../../data/races";
 
 function EditData() {
   const [currentEntry, setCurrentEntry] = useState(null);
   const [distances, setDistances] = useState([]);
   const { race, stickNumber } = useParams();
+  const genderChoices = ["male", "female", "other"];
+  const [loading, setLoading] = useState(null);
+  let updated = null;
 
   useEffect(() => {
     async function getData(race, stickNumber) {
       allRaces.forEach((raceObject) => {
         if (race === raceObject.name) {
           setDistances(raceObject.distances);
-          console.log(distances);
         }
       });
       setCurrentEntry(await fetchEntry(race, stickNumber));
@@ -24,11 +28,14 @@ function EditData() {
   }, []);
 
   return (
-    <div>
+    <div className="edit-data-container">
       {!currentEntry && <h1>Loading...</h1>}
-      {currentEntry && (
+      {currentEntry && currentEntry.hasOwnProperty("message") && (
+        <h2>{currentEntry.message}</h2>
+      )}
+      {currentEntry && !currentEntry.hasOwnProperty("message") && (
         <div>
-          <form>
+          <form id="finisher-data-form">
             <h1>{race}</h1>
             <h2>Finisher No. {stickNumber}</h2>
             <h3>
@@ -52,24 +59,57 @@ function EditData() {
                 <p>Select distance raced:</p>
                 {distances.map((distance, index) => {
                   return (
-                    <div>
+                    <div key={index}>
                       <input
                         id={distance}
                         value={distance}
                         name="distances"
                         type="radio"
-                        key={index}
+                        //TODO: make radio button "checked" if distance matches
                       ></input>
-                      <label for={distance}>{distance}</label>
+                      <label htmlFor={distance}>{distance}</label>
                       <br />
                     </div>
                   );
                 })}
               </div>
             )}
+            <p>Select gender:</p>
+            {genderChoices.map((choice, index) => {
+              return (
+                <div key={index}>
+                  <input
+                    id={choice}
+                    value={choice}
+                    name="genders"
+                    type="radio"
+                  ></input>
+                  <label htmlFor={choice}>{choice}</label>
+                </div>
+              );
+            })}
+            <br />
+            <button
+              onClick={async (event) => {
+                setLoading("loading");
+                updated = await handleSubmit(event, race, stickNumber);
+                if (updated) {
+                  setLoading("loaded");
+                } else {
+                  setLoading("failed");
+                }
+              }}
+            >
+              Submit
+            </button>
+            <br />
+            <button onClick={handleReset}>Reset</button>
           </form>
         </div>
       )}
+      {loading === "loading" && <p>Data submitted...please wait!</p>}
+      {loading === "loaded" && <p>Data successfully updated!</p>}
+      {loading === "failed" && <p>Data failed to update. Please try again.</p>}
     </div>
   );
 }
