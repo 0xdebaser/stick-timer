@@ -1,6 +1,6 @@
 export const upcomingRaces = [
   // DO NOT DELETE THE FIRST ENTRY ("Please select...") OR MOVE IT!!!
-  { name: "Please select a race" },
+
   {
     name: "Wobble Gobble",
     distances: ["1 mile", "5k", "10k"],
@@ -19,6 +19,7 @@ export const upcomingRaces = [
 ];
 
 export const allRaces = [
+  { name: "Please select a race" },
   { name: "Wobble Gobble", distances: ["1 mile", "5k", "10k"] },
   {
     name: "Test Race 1",
