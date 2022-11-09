@@ -1,6 +1,6 @@
-import "./resultsTable.styles.scss";
+import "./preliminaryResultsTable.styles.scss";
 
-function ResultsTable(props) {
+function PreliminaryResultsTable(props) {
   if (props.currentRace && props.currentRace.hasOwnProperty("finishers")) {
     return (
       <div>
@@ -35,4 +35,4 @@ function ResultsTable(props) {
   }
 }
 
-export default ResultsTable;
+export default PreliminaryResultsTable;

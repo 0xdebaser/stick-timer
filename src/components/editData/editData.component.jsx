@@ -108,7 +108,12 @@ function EditData() {
         </div>
       )}
       {loading === "loading" && <p>Data submitted...please wait!</p>}
-      {loading === "loaded" && <p>Data successfully updated!</p>}
+      {loading === "loaded" && (
+        <p>
+          Data successfully updated! <a href={`/results/${race}`}>Click here</a>
+          to goto updated results.
+        </p>
+      )}
       {loading === "failed" && <p>Data failed to update. Please try again.</p>}
     </div>
   );

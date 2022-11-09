@@ -37,7 +37,7 @@ function StickButton(props) {
   async function fetchStickNumber() {
     const entryData = await fetchEntry(props.currentRace.name, "*");
     if (entryData) {
-      setStickNumber(entryData.count);
+      setStickNumber(entryData.count === 0 ? 1 : entryData.count);
       setLoading(false);
     } else alert("Could not load stick number! Please refresh app.");
   }

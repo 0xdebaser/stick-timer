@@ -4,19 +4,19 @@ import "./timer.styles.scss";
 import addEntryToDatabase from "../../utilties/addEntryToDatabase";
 import RaceClock from "../raceClock/raceClock.component";
 import RaceSelection from "../optionSelection/raceSelection.component";
-import ResultsTable from "../resultsTable/resultsTable.component";
+import PreliminaryResultsTable from "../resultsTable/preliminaryResultsTable.component";
 import StickButton from "../stickButton/stickButton.component";
 
 function Timer() {
   const [currentRace, setCurrentRace] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
 
-  function startRace() {
+  async function startRace() {
     const raceStartTime = Date.now();
     const currentRaceDeepCopy = JSON.parse(JSON.stringify(currentRace));
     currentRaceDeepCopy["startTime"] = raceStartTime;
     setCurrentRace(currentRaceDeepCopy);
-    addEntryToDatabase(currentRace.name, 0, raceStartTime);
+    await addEntryToDatabase(currentRaceDeepCopy.name, 0, raceStartTime);
   }
 
   return (
@@ -64,7 +64,7 @@ function Timer() {
       {/* Display table of results if there is a finisher */}
       {currentRace && currentRace.hasOwnProperty("finishers") && (
         <div className="results-table-container">
-          <ResultsTable currentRace={currentRace} />
+          <PreliminaryResultsTable currentRace={currentRace} />
         </div>
       )}
     </div>

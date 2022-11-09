@@ -34,7 +34,9 @@ async function handleSubmit(event, race, stickNumber) {
     gender
   );
 
-  console.log(updated);
+  if (updated) {
+    return true;
+  } else return false;
 }
 
 export default handleSubmit;
