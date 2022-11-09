@@ -4,6 +4,7 @@ import "./timer.styles.scss";
 import addEntryToDatabase from "../../utilties/addEntryToDatabase";
 import RaceClock from "../raceClock/raceClock.component";
 import RaceSelection from "../optionSelection/raceSelection.component";
+import ResultSelection from "../optionSelection/resultSelection.component";
 import PreliminaryResultsTable from "../resultsTable/preliminaryResultsTable.component";
 import StickButton from "../stickButton/stickButton.component";
 
@@ -26,7 +27,13 @@ function Timer() {
           <h1>Stick Timer</h1>
         </div>
         {/* Prompt for race selection OR display race name if selection has been made*/}
-        {!currentRace && <RaceSelection setCurrentRace={setCurrentRace} />}
+        {!currentRace && (
+          <div>
+            <RaceSelection setCurrentRace={setCurrentRace} />
+            <p>OR</p>
+            <ResultSelection />
+          </div>
+        )}
         {currentRace && (
           <div className="race-title-container">
             <h2>{currentRace.name}</h2>

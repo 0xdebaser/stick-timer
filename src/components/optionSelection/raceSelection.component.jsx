@@ -35,7 +35,7 @@ function RaceSelection(props) {
 
   return (
     <div className="RaceSelection">
-      <label htmlFor="raceSelection">Select race: </label>
+      <label htmlFor="raceSelection">Select a race to time: </label>
       <select id="raceSelection" name="raceSelection" onChange={setRace}>
         {upcomingRaces.map((race, index) => {
           return (
