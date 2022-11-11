@@ -49,7 +49,11 @@ function StickButton(props) {
   return (
     <div>
       {loading && <p>loading...</p>}
-      {!loading && <button onClick={clickHandler}>{stickNumber}</button>}
+      {!loading && (
+        <button className="stick-button" onClick={clickHandler}>
+          {stickNumber}
+        </button>
+      )}
     </div>
   );
 }

@@ -12,8 +12,9 @@ function PreliminaryResultsTable(props) {
             </tr>
           </thead>
           <tbody>
-            {Object.getOwnPropertyNames(props.currentRace.finishers).map(
-              (key) => {
+            {Object.getOwnPropertyNames(props.currentRace.finishers)
+              .reverse()
+              .map((key) => {
                 return (
                   <tr key={key}>
                     <td>{key}</td>
@@ -26,8 +27,7 @@ function PreliminaryResultsTable(props) {
                     </td>
                   </tr>
                 );
-              }
-            )}
+              })}
           </tbody>
         </table>
       </div>

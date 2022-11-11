@@ -8,7 +8,7 @@ export const upcomingRaces = [
   },
   {
     name: "Test Race 1",
-    distances: ["1 mile", "5k", "10k"],
+    distances: ["4 mile", "5 mile", "6 mile"],
     password: "1234",
   },
   {

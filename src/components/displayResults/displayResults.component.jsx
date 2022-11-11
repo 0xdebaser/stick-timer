@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import "./displayResults.styles.scss";
-import { allRaces } from "../../data/races";
+import { upcomingRaces, allRaces } from "../../data/races";
 import fetchEntry from "../../utilties/fetchEntry";
 import FinalResultsTable from "../resultsTable/finalResultsTable.component";
 
@@ -52,6 +52,16 @@ function DisplayResults() {
     }
   }, []);
 
+  function isRaceFinal(raceName) {
+    let isFinal = true;
+    upcomingRaces.forEach((raceObj) => {
+      if (raceObj.name === raceName) {
+        isFinal = false;
+      }
+    });
+    return isFinal;
+  }
+
   return (
     <div className="display-results-container">
       {loading && <h1>please wait while results are loaded!</h1>}
@@ -62,6 +72,7 @@ function DisplayResults() {
         <div className="results-container">
           {/* Race Name */}
           <h1>{allRaces[raceIndex].name}</h1>
+          <h3>{isRaceFinal(race) ? "Final " : "Preliminary "}Results</h3>
           {/* Distance options if > 1 */}
           {allRaces[raceIndex].distances.length > 1 && (
             <p>
