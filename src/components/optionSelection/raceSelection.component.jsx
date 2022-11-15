@@ -27,8 +27,25 @@ function RaceSelection(props) {
         //If race hasn't started, set only name, otherwise set start time as well
         if (startEntry.hasOwnProperty("message")) {
           props.setCurrentRace({ name: race });
-        } else
-          props.setCurrentRace({ name: race, startTime: startEntry.data.time });
+        } else {
+          const finishers = await fetchEntry(race, "!");
+          const finishersArray = [];
+          console.log(`finishers:`);
+          console.log(finishers);
+          // If there have been any finishers, add that data to state variable
+          if (finishers.data.length > 1) {
+            for (let i = 1; i < finishers.data.length; i++) {
+              finishersArray.push(finishers.data[i]);
+            }
+            console.log("prior finisher data loaded");
+            console.log(finishersArray);
+          }
+          props.setCurrentRace({
+            name: race,
+            startTime: startEntry.data.time,
+            finishers: finishersArray,
+          });
+        }
       }
     }
   }

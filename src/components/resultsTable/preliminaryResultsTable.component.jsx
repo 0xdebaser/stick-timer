@@ -1,8 +1,30 @@
+import { useState, useEffect } from "react";
+
 import "./preliminaryResultsTable.styles.scss";
 import ExportButton from "./exportButton.component";
 
 function PreliminaryResultsTable(props) {
-  if (props.currentRace && props.currentRace.hasOwnProperty("finishers")) {
+  const [sortedRaceResults, setSortedRaceResults] = useState();
+
+  async function sortByStickNumber(results) {
+    const tempArray = [];
+    const numberOfSticks = results.length;
+    console.log("running sortByStickNumber...");
+    for (let n = 1; n <= numberOfSticks; n++) {
+      for (let i = 0; i < results.length; i++) {
+        if (results[i].stickNumber === n) {
+          tempArray.push(results[i]);
+        }
+      }
+    }
+    setSortedRaceResults(tempArray);
+  }
+
+  useEffect(() => {
+    sortByStickNumber(props.currentRace.finishers);
+  }, []);
+
+  if (sortedRaceResults) {
     return (
       <div>
         <table>
@@ -13,18 +35,18 @@ function PreliminaryResultsTable(props) {
             </tr>
           </thead>
           <tbody>
-            {Object.getOwnPropertyNames(props.currentRace.finishers)
+            {sortedRaceResults
+              .slice()
               .reverse()
-              .map((key) => {
+              .map((finisher, index) => {
                 return (
-                  <tr key={key}>
-                    <td>{key}</td>
+                  <tr key={index}>
+                    <td>{finisher.stickNumber}</td>
                     <td>
-                      {props.currentRace.finishers[key]["hours"]}:
-                      {props.currentRace.finishers[key]["minutes"] < 10 && 0}
-                      {props.currentRace.finishers[key]["minutes"]}:
-                      {props.currentRace.finishers[key]["seconds"] < 10 && 0}
-                      {props.currentRace.finishers[key]["seconds"].toFixed(1)}
+                      {finisher.hours}:{finisher.minutes < 10 && 0}
+                      {finisher.minutes}:{finisher.seconds < 10 && 0}
+                      {finisher.seconds}
+                      {/* {props.currentRace.finishers[key]["seconds"].toFixed(1)} */}
                     </td>
                   </tr>
                 );
