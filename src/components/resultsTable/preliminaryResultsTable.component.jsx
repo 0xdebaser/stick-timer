@@ -1,4 +1,5 @@
 import "./preliminaryResultsTable.styles.scss";
+import ExportButton from "./exportButton.component";
 
 function PreliminaryResultsTable(props) {
   if (props.currentRace && props.currentRace.hasOwnProperty("finishers")) {
@@ -30,6 +31,7 @@ function PreliminaryResultsTable(props) {
               })}
           </tbody>
         </table>
+        <ExportButton />
       </div>
     );
   }

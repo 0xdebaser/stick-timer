@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import "./displayResults.styles.scss";
 import { upcomingRaces, allRaces } from "../../data/races";
+import ExportButton from "../resultsTable/exportButton.component";
 import fetchEntry from "../../utilties/fetchEntry";
 import FinalResultsTable from "../resultsTable/finalResultsTable.component";
 
@@ -101,6 +102,7 @@ function DisplayResults() {
           })}
         </div>
       )}
+      <ExportButton />
     </div>
   );
 }
