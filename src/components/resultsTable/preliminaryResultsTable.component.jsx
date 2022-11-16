@@ -9,7 +9,6 @@ function PreliminaryResultsTable(props) {
   async function sortByStickNumber(results) {
     const tempArray = [];
     const numberOfSticks = results.length;
-    console.log("running sortByStickNumber...");
     for (let n = 1; n <= numberOfSticks; n++) {
       for (let i = 0; i < results.length; i++) {
         if (results[i].stickNumber === n) {
@@ -45,8 +44,7 @@ function PreliminaryResultsTable(props) {
                     <td>
                       {finisher.hours}:{finisher.minutes < 10 && 0}
                       {finisher.minutes}:{finisher.seconds < 10 && 0}
-                      {finisher.seconds}
-                      {/* {props.currentRace.finishers[key]["seconds"].toFixed(1)} */}
+                      {finisher.seconds.toFixed(1)}
                     </td>
                   </tr>
                 );
