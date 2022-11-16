@@ -9,6 +9,7 @@ import FinalResultsTable from "../resultsTable/finalResultsTable.component";
 
 function DisplayResults() {
   const { race } = useParams();
+  const [preliminaryResults, setPreliminaryResults] = useState(false);
   const [raceIndex, setRaceIndex] = useState(-1);
   const [loading, setLoading] = useState(true);
   const [sortedRaceResults, setSortedRaceResults] = useState(null);
@@ -42,6 +43,8 @@ function DisplayResults() {
         console.log(sortedRaceResults);
       }
 
+      isRaceFinal(race);
+
       if (raceObject.name === race) {
         setRaceIndex(index);
         getRaceData();
@@ -54,14 +57,16 @@ function DisplayResults() {
   }, []);
 
   function isRaceFinal(raceName) {
-    let isFinal = true;
+    console.log("Running isRaceFinal");
     upcomingRaces.forEach((raceObj) => {
+      console.log(raceObj.name, raceName);
       if (raceObj.name === raceName) {
-        isFinal = false;
+        setPreliminaryResults(true);
       }
     });
-    return isFinal;
   }
+
+  useEffect(() => {}, []);
 
   return (
     <div className="display-results-container">
@@ -73,7 +78,7 @@ function DisplayResults() {
         <div className="results-container">
           {/* Race Name */}
           <h1>{allRaces[raceIndex].name}</h1>
-          <h3>{isRaceFinal(race) ? "Final " : "Preliminary "}Results</h3>
+          <h3>{preliminaryResults ? "Preliminary " : "Final "}Results</h3>
           {/* Distance options if > 1 */}
           {allRaces[raceIndex].distances.length > 1 && (
             <p>

@@ -40,9 +40,16 @@ function EditData() {
   return (
     <div className="edit-data-container">
       {isRaceFinal(race) && (
-        <h1>
-          Race results for {race} are final; finisher data cannot be edited!
-        </h1>
+        <div>
+          <h1>
+            Race results for {race} are final; finisher data cannot be edited!
+          </h1>
+          <h2>
+            <a href={`https://stick-timer.vercel.app/results/${race}`}>
+              Click here to view final results.
+            </a>
+          </h2>
+        </div>
       )}
       {!isRaceFinal(race) && !currentEntry && <h1>Loading...</h1>}
       {!isRaceFinal(race) &&
