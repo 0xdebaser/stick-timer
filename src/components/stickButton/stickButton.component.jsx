@@ -24,6 +24,7 @@ function StickButton(props) {
       Math.floor(rawRaceTime / (1000 * 60)) % 60;
     currentRaceDeepCopy["finishers"][stickNumber]["seconds"] =
       (rawRaceTime / 1000) % 60;
+    currentRaceDeepCopy["finishers"][stickNumber]["stickNumber"] = stickNumber;
     props.setCurrentRace(currentRaceDeepCopy);
     addEntryToDatabase(
       props.currentRace.name,

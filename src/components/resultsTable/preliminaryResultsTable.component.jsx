@@ -11,7 +11,8 @@ function PreliminaryResultsTable(props) {
     const numberOfSticks = results.length;
     for (let n = 1; n <= numberOfSticks; n++) {
       for (let i = 0; i < results.length; i++) {
-        if (results[i].stickNumber === n) {
+        console.log(results[i]);
+        if (results[i] && results[i].stickNumber === n) {
           tempArray.push(results[i]);
         }
       }
@@ -21,7 +22,7 @@ function PreliminaryResultsTable(props) {
 
   useEffect(() => {
     sortByStickNumber(props.currentRace.finishers);
-  }, []);
+  }, [props.currentRace.finishers]);
 
   if (sortedRaceResults) {
     return (
