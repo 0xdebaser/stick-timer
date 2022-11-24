@@ -3,7 +3,7 @@ export const upcomingRaces = [
   { name: "Please select a race" },
   {
     name: "2022 Wobble Gobble",
-    distances: ["1 mile", "5k", "10k"],
+    distances: ["1 mile", "3.5 miles", "6.4 miles"],
     password: "1234",
   },
   {
@@ -20,7 +20,10 @@ export const upcomingRaces = [
 
 export const allRaces = [
   { name: "Please select a race" },
-  { name: "2022 Wobble Gobble", distances: ["1 mile", "5k", "10k"] },
+  {
+    name: "2022 Wobble Gobble",
+    distances: ["1 mile", "3.5 miles", "6.4 miles"],
+  },
   {
     name: "Test Race 1",
     distances: ["1 mile", "5k", "10k"],
