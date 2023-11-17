@@ -2,13 +2,13 @@ export const upcomingRaces = [
   // DO NOT DELETE THE FIRST ENTRY ("Please select...") OR MOVE IT!!!
   { name: "Please select a race" },
   {
-    name: "Test Race 1",
-    distances: ["4 mile", "5 mile", "6 mile"],
+    name: "2023_Wobble_Gobble",
+    distances: ["1 miles", "3.5 miles", "6.4 miles"],
     password: "1234",
   },
   {
-    name: "Test Race 2",
-    distances: ["1 mile", "5k", "10k"],
+    name: "Test Race 1",
+    distances: ["4 mile", "5 mile", "6 mile"],
     password: "1234",
   },
 ];
@@ -21,11 +21,11 @@ export const allRaces = [
     distances: ["1 mile", "3.5 miles", "6.4 miles"],
   },
   {
-    name: "Test Race 1",
-    distances: ["1 mile", "5k", "10k"],
+    name: "2023_Wobble_Gobble",
+    distances: ["1 mile", "3.5 miles", "6.4 miles"],
   },
   {
-    name: "Test Race 2",
+    name: "Test Race 1",
     distances: ["1 mile", "5k", "10k"],
   },
 ];
