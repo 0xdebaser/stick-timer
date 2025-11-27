@@ -22,8 +22,12 @@ function FinalResultsTable(props) {
                 return (
                   <tr key={index}>
                     <td>{finisherNumber}</td>
-                    <td>{record.name}</td>
-                    <td>{record.gender.slice(0, 1).toUpperCase()}</td>
+                    <td>{record.name || "Mystery Gobbler"}</td>
+                    <td>
+                      {record.gender
+                        ? record.gender.slice(0, 1).toUpperCase()
+                        : ""}
+                    </td>
                     <td>
                       {record.hours}:{record.minutes < 10 && 0}
                       {record.minutes}:{record.seconds < 10 && 0}
